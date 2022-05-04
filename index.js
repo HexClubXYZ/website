@@ -14,36 +14,57 @@ speechBubbleClose.forEach((i) => {
 	});
 });
 
-speechBubbleRight.addEventListener("mouseover", () => {
-	if (!thead.classList.contains("thead-flash-once")) {
-		thead.classList.add("thead-flash-once");
+function getDivider(decimal) {
+	let divider = "1";
+	for (let i = 0; i < decimal; i++) {
+		divider += "0";
 	}
-});
+	divider = Number(divider);
+	return divider;
+}
 
-speechBubbleRight.addEventListener("mouseout", () => {
-	if (thead.classList.contains("thead-flash-once")) {
-		thead.classList.remove("thead-flash-once");
-	}
-});
+// speechBubbleRight.addEventListener("mouseover", () => {
+// 	if (!thead.classList.contains("thead-flash-once")) {
+// 		thead.classList.add("thead-flash-once");
+// 	}
+// });
+
+// speechBubbleRight.addEventListener("mouseout", () => {
+// 	if (thead.classList.contains("thead-flash-once")) {
+// 		thead.classList.remove("thead-flash-once");
+// 	}
+// });
 
 ensDataArray.forEach((ensData) => {
 	let row = tbody.insertRow(-1);
 	row.className = "order";
 
 	let cell = row.insertCell();
-	cell.innerHTML = ensData.name;
+	cell.innerHTML =
+		'<a href="' +
+		ensData.data.permalink +
+		'" target="_blank">' +
+		ensData.name +
+		" </a>";
 	cell = row.insertCell();
 	let currentPrice = ensData?.data?.orders[0]?.current_price;
+	let decimal = ensData?.data?.orders[0]?.payment_token_contract?.decimals;
+	if (decimal) {
+		decimal = Number(decimal);
+	}
+	if (currentPrice) {
+		currentPrice = Number(currentPrice);
+		let divider = getDivider(decimal);
+		currentPrice = currentPrice / divider;
+	}
 	cell.innerHTML = currentPrice ? Number(currentPrice) : "";
 
 	cell = row.insertCell();
 	cell.innerHTML = ensData.data.num_sales;
-	cell = row.insertCell();
-	cell.innerHTML =
-		'<a href="' + ensData.data.permalink + '" target="_blank">Permalink </a>';
 
 	cell = row.insertCell();
-	cell.innerHTML = ensData.data?.owner?.user?.username;
+	const owner = ensData.data?.owner?.user?.username;
+	cell.innerHTML = owner ? owner : "";
 
 	cell = row.insertCell();
 	let address = ensData?.data?.owner?.address;
