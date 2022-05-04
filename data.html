@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- 
+      https://content-security-policy.com/
+      https://developers.google.com/web/fundamentals/security/csp/
+      We also have 'unsafe-inline' because github-corners has inline styles. 
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' https://stackpath.bootstrapcdn.com https://fonts.googleapis.com 'unsafe-inline'; font-src data: https://fonts.gstatic.com https://stackpath.bootstrapcdn.com;"
+    />
+    <link
+      rel="icon"
+      href="assets/pinecone-software-limited-favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/speech-bubbles.css" />
+    <link rel="stylesheet" href="css/github-corner.css" />
+    <title>
+      Filter and sort a dynamically created table with Vanilla JavaScript
+    </title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row mt-5 mb-3">
+        <div class="col-md-6">
+          <div class="page-header">
+            <h1>Hex ENS Names</h1>
+          </div>
+        </div>
+        <div
+          class="col-md-6 dev-signature d-flex flex-wrap justify-content-end align-content-end"
+        >
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div
+            class="speech-bubble-left breathe-left d-flex align-items-center"
+          >
+            <span><b>Hey!</b> I am filtering in realtime!</span>
+            <span class="speech-bubble-close"><i class="fa fa-times"></i></span>
+          </div>
+          <div
+            class="speech-bubble-right breathe-right d-flex align-items-center"
+          >
+            <span><b>Hey!</b> I can sort column based!</span>
+            <span class="speech-bubble-close">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </span>
+          </div>
+          <input
+            class="form-control form-control-lg filter-input"
+            type="text"
+            placeholder="Filter by ens names..."
+            autofocus="autofocus"
+            value=""
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-sm mt-5">
+            <thead>
+              <tr>
+                <th scope="col">
+                  # Name &nbsp;
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th scope="col">
+                  data.id&nbsp;
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th scope="col">
+                  NumSales &nbsp;
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th scope="col">
+                  Permalink &nbsp;
+                  <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+                </th>
+                <th scope="col">
+                  Owner &nbsp;
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th scope="col">
+                  Owner Address &nbsp;
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th scope="col">
+                  TokenId &nbsp;
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th scope="col">
+                  Price &nbsp;
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th scope="col">
+                  TopBid &nbsp;
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <p class="err">No results were found...</p>
+        </div>
+      </div>
+      <footer>
+        <div class="row">
+          <div
+            class="col-md-12 mt-5 mb-5 dev-signature d-flex flex-wrap justify-content-end align-content-center"
+          >
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    
+
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
