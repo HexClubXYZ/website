@@ -33,7 +33,9 @@ ensDataArray.forEach((ensData) => {
 	let cell = row.insertCell();
 	cell.innerHTML = ensData.name;
 	cell = row.insertCell();
-	cell.innerHTML = ensData.data.id;
+	let currentPrice = ensData?.data?.orders[0]?.current_price;
+	cell.innerHTML = currentPrice ? Number(currentPrice) : "";
+
 	cell = row.insertCell();
 	cell.innerHTML = ensData.data.num_sales;
 	cell = row.insertCell();
@@ -52,11 +54,6 @@ ensDataArray.forEach((ensData) => {
 	let tokenId = ensData?.data?.token_id;
 	cell.innerHTML = tokenId ? tokenId.substr(0, 5) : "";
 	cell.title = tokenId;
-
-	cell = row.insertCell();
-	let currentPrice = "";
-
-	cell.innerHTML = currentPrice;
 
 	cell = row.insertCell();
 	let topBid = ensData?.data?.top_bid;
