@@ -1,4 +1,4 @@
-import { data } from "https://hexclub.xyz//0xff-data.js";
+import { data } from "https://hexclub.xyz/0xff-data.js";
 
 let ensDataArray = data.urlArray;
 let updateDate = data.updateDate;
