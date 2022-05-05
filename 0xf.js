@@ -65,7 +65,7 @@ ensDataArray.forEach((ensData) => {
 	cell = row.insertCell();
 	const owner = ensData.data?.owner?.user?.username;
 	let address = ensData?.data?.owner?.address;
-	cell.innerHTML = owner ? `<a href="https://opensea.io/${address}" target="_blank">${owner}` : "";
+	cell.innerHTML = owner ? `<a href="https://opensea.io/${address}" target="_blank">${owner}` : `<a href="https://opensea.io/${address}" target="_blank">${address.substr(0, 5)}`;
 
 });
 
