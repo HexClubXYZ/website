@@ -1,4 +1,4 @@
-import { data } from "./0xfff-data.js";
+import { data } from "https://hexclub.xyz/0xfff-data.js";
 
 let ensDataArray = data.urlArray;
 let updateDate = data.updateDate;
@@ -40,46 +40,61 @@ function getDivider(decimal) {
 // });
 
 ensDataArray.forEach((ensData) => {
-	let row = tbody.insertRow(-1);
-	row.className = "order";
+	const unregistered = ensData.unregistered;
+	console.log(`unregistered ${unregistered}`);
+	if (unregistered === false) {
+		let row = tbody.insertRow(-1);
+		row.className = "order";
 
-	let cell = row.insertCell();
-	cell.innerHTML =
-		'<a href="' +
-		ensData.data.permalink +
-		'" target="_blank">' +
-		ensData.name +
-		" </a>";
-	cell = row.insertCell();
-	let orders = ensData?.data?.orders;
-	let currentPrice = null;
-	let decimal = null;
-	if (orders && orders.length) {
-		currentPrice = orders[0].current_price;
-		decimal = orders[0].payment_token_contract?.decimals;
-	}
-	if (decimal) {
-		decimal = Number(decimal);
-	}
-	if (currentPrice) {
-		currentPrice = Number(currentPrice);
-		let divider = getDivider(decimal);
-		currentPrice = currentPrice / divider;
-	}
-	cell.innerHTML = currentPrice ? Number(currentPrice) : "";
+		let cell = row.insertCell();
+		cell.innerHTML =
+			'<a href="' +
+			ensData.data.permalink +
+			'" target="_blank">' +
+			ensData.name +
+			" </a>";
+		cell = row.insertCell();
+		let orders = ensData?.data?.orders;
+		let currentPrice = null;
+		let decimal = null;
+		if (orders && orders.length) {
+			currentPrice = orders[0].current_price;
+			decimal = orders[0].payment_token_contract?.decimals;
+		}
+		if (decimal) {
+			decimal = Number(decimal);
+		}
+		if (currentPrice) {
+			currentPrice = Number(currentPrice);
+			let divider = getDivider(decimal);
+			currentPrice = currentPrice / divider;
+		}
+		cell.innerHTML = currentPrice ? Number(currentPrice) : "";
 
-	cell = row.insertCell();
-	cell.innerHTML = ensData.data.num_sales;
+		cell = row.insertCell();
+		cell.innerHTML = ensData.data.num_sales;
 
-	cell = row.insertCell();
-	const owner = ensData.data?.owner?.user?.username;
-	let address = ensData?.data?.owner?.address;
-	cell.innerHTML = owner
-		? `<a href="https://opensea.io/${address}" target="_blank">${owner}`
-		: `<a href="https://opensea.io/${address}" target="_blank">${address.substr(
-				0,
-				5
-		  )}`;
+		cell = row.insertCell();
+		const owner = ensData.data?.owner?.user?.username;
+		let address = ensData?.data?.owner?.address;
+		cell.innerHTML = owner
+			? `<a href="https://opensea.io/${address}" target="_blank">${owner}`
+			: `<a href="https://opensea.io/${address}" target="_blank">${address.substr(
+					0,
+					5
+			  )}`;
+		cell = row.insertCell();
+		cell.innerHTML = "Registered";
+	} else {
+		let row = tbody.insertRow(-1);
+		row.className = "order";
+		let cell = row.insertCell();
+		cell = row.insertCell();
+		cell = row.insertCell();
+		cell = row.insertCell();
+		cell = row.insertCell();
+		cell.innerHTML = "Unregistered";
+	}
 });
 
 // FILTER
