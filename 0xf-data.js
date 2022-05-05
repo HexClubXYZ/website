@@ -547,6 +547,8 @@ export const ensDataArray = [
             "address": "0x0000000000000000000000000000000000000000",
             "config": ""
           },
+          "current_price": "1300000000000000000.000000000",
+          "current_bounty": "13000000000000000",
           "bounty_multiple": "0.01",
           "maker_relayer_fee": "0",
           "taker_relayer_fee": "250",
@@ -578,6 +580,7 @@ export const ensDataArray = [
             "eth_price": "1.000000000000000",
             "usd_price": "2858.400000000000091000"
           },
+          "base_price": "1300000000000000000",
           "extra": "0",
           "quantity": "1",
           "salt": "14581757619648246313727043389461315285283035397509237828401620381407143513393",
