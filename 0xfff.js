@@ -39,9 +39,36 @@ function getDivider(decimal) {
 // 	}
 // });
 
+// SORT data ;
+function getCurrentPrice(ensData) {
+	let orders = ensData?.data?.orders;
+	let currentPrice = null;
+	let decimal = null;
+	if (orders && orders.length) {
+		currentPrice = orders[0].current_price;
+		decimal = orders[0].payment_token_contract?.decimals;
+	}
+	if (decimal) {
+		decimal = Number(decimal);
+	}
+	if (currentPrice) {
+		currentPrice = Number(currentPrice);
+		let divider = getDivider(decimal);
+		currentPrice = currentPrice / divider;
+	}
+	return currentPrice;
+}
+
+ensDataArray = ensDataArray.sort((a, b) => {
+	let aCurrentPrice = getCurrentPrice(a);
+
+	let bCurrentPrice = getCurrentPrice(b);
+	return aCurrentPrice - bCurrentPrice;
+});
+
 ensDataArray.forEach((ensData) => {
 	const unregistered = ensData.unregistered;
-	console.log(`unregistered ${unregistered}`);
+	//console.log(`unregistered ${unregistered}`);
 	if (unregistered === false) {
 		let row = tbody.insertRow(-1);
 		row.className = "order";
@@ -54,21 +81,9 @@ ensDataArray.forEach((ensData) => {
 			ensData.name +
 			" </a>";
 		cell = row.insertCell();
-		let orders = ensData?.data?.orders;
-		let currentPrice = null;
-		let decimal = null;
-		if (orders && orders.length) {
-			currentPrice = orders[0].current_price;
-			decimal = orders[0].payment_token_contract?.decimals;
-		}
-		if (decimal) {
-			decimal = Number(decimal);
-		}
-		if (currentPrice) {
-			currentPrice = Number(currentPrice);
-			let divider = getDivider(decimal);
-			currentPrice = currentPrice / divider;
-		}
+
+		let currentPrice = getCurrentPrice(ensData);
+
 		cell.innerHTML = currentPrice ? Number(currentPrice) : "";
 
 		cell = row.insertCell();
@@ -129,13 +144,6 @@ let sortDirection;
 th.forEach((col, idx) => {
 	col.addEventListener("click", () => {
 		sortDirection = !sortDirection;
-		/** Remember:
-		 * We obtained all tr elements that has 'order' class before!
-		 * However, querySelectorAll returns a NodeList, not an Array.
-		 * While forEach method can be used on NodeLists, filter method cannot.
-		 * This is why we preferred to make this conversion below; where we actually need an array to filter.
-		 * Note: NoteList is very similar to array and easy to convert.
-		 **/
 		const rowsArrFromNodeList = Array.from(order);
 		const filteredRows = rowsArrFromNodeList.filter(
 			(item) => item.style.display != "none"
