@@ -26,9 +26,9 @@
       </div>
       <div class="w-full ">
         <input class="w-5/6 p-2 filter-input" type="text" placeholder="Filter by anything..." autofocus="autofocus"
-          value="" />
+          value="" style="color:#000;width:50%" />
       </div>
-      <table class="table table-sm mt-5">
+      <table class="table table-sm mt-5" style="min-width:80%">
         <thead>
           <tr>
             <th scope="col">
@@ -40,24 +40,11 @@
               <i class="fa fa-sort" aria-hidden="true"></i>
             </th>
             <th scope="col">
-              NumSales &nbsp;
+              Sales &nbsp;
               <i class="fa fa-sort" aria-hidden="true"></i>
             </th>
             <th scope="col">
               Owner &nbsp;
-              <i class="fa fa-sort" aria-hidden="true"></i>
-            </th>
-            <th scope="col">
-              Owner Address &nbsp;
-              <i class="fa fa-sort" aria-hidden="true"></i>
-            </th>
-            <th scope="col">
-              TokenId &nbsp;
-              <i class="fa fa-sort" aria-hidden="true"></i>
-            </th>
-
-            <th scope="col">
-              TopBid &nbsp;
               <i class="fa fa-sort" aria-hidden="true"></i>
             </th>
           </tr>
@@ -159,6 +146,10 @@
     a {
       color: #32CD32 !important;
       font-weight: 700;
+    }
+
+    .err {
+      display: none;
     }
 
     button.hexclub {

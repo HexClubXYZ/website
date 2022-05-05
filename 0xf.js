@@ -64,22 +64,9 @@ ensDataArray.forEach((ensData) => {
 
 	cell = row.insertCell();
 	const owner = ensData.data?.owner?.user?.username;
-	cell.innerHTML = owner ? owner : "";
-
-	cell = row.insertCell();
 	let address = ensData?.data?.owner?.address;
-	cell.innerHTML = address ? address.substr(0, 5) : "";
-	cell.title = address;
+	cell.innerHTML = owner ? `<a href="https://opensea.io/${address}" target="_blank">${owner}` : "";
 
-	cell = row.insertCell();
-	let tokenId = ensData?.data?.token_id;
-	cell.innerHTML = tokenId ? tokenId.substr(0, 5) : "";
-	cell.title = tokenId;
-
-	cell = row.insertCell();
-	let topBid = ensData?.data?.top_bid;
-
-	cell.innerHTML = topBid;
 });
 
 // FILTER
