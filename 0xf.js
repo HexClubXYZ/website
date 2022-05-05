@@ -1,4 +1,4 @@
-import { ensDataArray } from "./data.js";
+import { ensDataArray } from "https://hexclub.xyz/0xf-data.js";
 
 const speechBubbleClose = document.querySelectorAll(".speech-bubble-close");
 const speechBubbleRight = document.querySelector(".speech-bubble-right");
