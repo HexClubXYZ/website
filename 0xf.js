@@ -93,7 +93,7 @@ filterInput.addEventListener("keyup", () => {
 	order.forEach((data) => {
 		thead.style.opacity = "1";
 		err.style.display = "";
-		speechBubbleRight.style.visibility = "";
+		//speechBubbleRight.style.visibility = "";
 		if (data.innerText.toUpperCase().indexOf(criteria) > -1) {
 			data.style.display = "";
 		} else {
@@ -102,7 +102,7 @@ filterInput.addEventListener("keyup", () => {
 			if (j === order.length) {
 				thead.style.opacity = "0.2";
 				err.style.display = "flex";
-				speechBubbleRight.style.visibility = "hidden";
+				//speechBubbleRight.style.visibility = "hidden";
 			}
 		}
 	});
