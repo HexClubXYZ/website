@@ -58,7 +58,7 @@ ensDataArray.forEach((ensData) => {
 		currentPrice = currentPrice / divider;
 	}
 	let isListPrice = ensData?.data?.orders[0]?.side;
-	if (!isListPrice) currentPrice = currentPrice + ' (BID)'
+	if (!isListPrice && currentPrice) currentPrice = currentPrice + ' (BID)'
 	cell.innerHTML = currentPrice ? currentPrice : "";
 
 	cell = row.insertCell();
