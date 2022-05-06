@@ -31,7 +31,15 @@ speechBubbleClose.forEach((i) => {
 // });
 
 ensDataArray = ensDataArray.sort((a, b) => {
-	return a.currentPrice - b.currentPrice;
+	if (a.currentPrice === b.currentPrice) {
+		return 0;
+	} else if (a.currentPrice === null) {
+		return 1;
+	} else if (b.currentPrice === null) {
+		return -1;
+	} else {
+		return a.currentPrice < b.currentPrice ? -1 : 1;
+	}
 });
 
 ensDataArray.forEach((ensData) => {
@@ -102,13 +110,6 @@ let sortDirection;
 th.forEach((col, idx) => {
 	col.addEventListener("click", () => {
 		sortDirection = !sortDirection;
-		/** Remember:
-		 * We obtained all tr elements that has 'order' class before!
-		 * However, querySelectorAll returns a NodeList, not an Array.
-		 * While forEach method can be used on NodeLists, filter method cannot.
-		 * This is why we preferred to make this conversion below; where we actually need an array to filter.
-		 * Note: NoteList is very similar to array and easy to convert.
-		 **/
 		const rowsArrFromNodeList = Array.from(order);
 		const filteredRows = rowsArrFromNodeList.filter(
 			(item) => item.style.display != "none"
@@ -116,16 +117,31 @@ th.forEach((col, idx) => {
 
 		filteredRows
 			.sort((a, b) => {
-				return a.childNodes[idx].innerHTML.localeCompare(
-					b.childNodes[idx].innerHTML,
-					"en",
-					{ numeric: true, sensitivity: "base" }
-				);
+				let aValue = a.childNodes[idx].innerHTML;
+				let bValue = b.childNodes[idx].innerHTML;
+				// return a.childNodes[idx].innerHTML.localeCompare(
+				// 	b.childNodes[idx].innerHTML,
+				// 	"en",
+				// 	{ numeric: true, sensitivity: "base" }
+				// );
+
+				if (aValue === bValue) {
+					return 0;
+				} else if (aValue === "") {
+					return 1;
+				} else if (bValue === "") {
+					return -1;
+				} else if (sortDirection) {
+					return Number(aValue) < Number(bValue) ? -1 : 1;
+				} else {
+					return Number(aValue) < Number(bValue) ? 1 : -1;
+				}
 			})
 			.forEach((row) => {
-				sortDirection
-					? tbody.insertBefore(row, tbody.childNodes[tbody.length])
-					: tbody.insertBefore(row, tbody.childNodes[0]);
+				tbody.insertBefore(row, tbody.childNodes[tbody.length]);
+				// sortDirection
+				// 	? tbody.insertBefore(row, tbody.childNodes[tbody.length])
+				// 	: tbody.insertBefore(row, tbody.childNodes[0]);
 			});
 	});
 });
