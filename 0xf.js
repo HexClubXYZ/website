@@ -1,4 +1,7 @@
-import { ensDataArray } from "https://hexclub.xyz/0xf-data.js";
+import { data } from "https://hexclub.xyz/0xf-data.js";
+
+let ensDataArray = data.urlArray;
+let updateDate = data.updateDate;
 
 const speechBubbleClose = document.querySelectorAll(".speech-bubble-close");
 const speechBubbleRight = document.querySelector(".speech-bubble-right");
@@ -6,6 +9,7 @@ const tbody = document.querySelector("tbody");
 const thead = document.querySelector("thead");
 const th = document.querySelectorAll("thead th");
 const err = document.querySelector(".err");
+document.getElementById("update_date").textContent = updateDate;
 
 // SPEECH BUBBLES
 speechBubbleClose.forEach((i) => {
@@ -13,15 +17,6 @@ speechBubbleClose.forEach((i) => {
 		i.parentElement.remove();
 	});
 });
-
-function getDivider(decimal) {
-	let divider = "1";
-	for (let i = 0; i < decimal; i++) {
-		divider += "0";
-	}
-	divider = Number(divider);
-	return divider;
-}
 
 // speechBubbleRight.addEventListener("mouseover", () => {
 // 	if (!thead.classList.contains("thead-flash-once")) {
@@ -35,6 +30,10 @@ function getDivider(decimal) {
 // 	}
 // });
 
+ensDataArray = ensDataArray.sort((a, b) => {
+	return a.currentPrice - b.currentPrice;
+});
+
 ensDataArray.forEach((ensData) => {
 	let row = tbody.insertRow(-1);
 	row.className = "order";
@@ -42,33 +41,33 @@ ensDataArray.forEach((ensData) => {
 	let cell = row.insertCell();
 	cell.innerHTML =
 		'<a href="' +
-		ensData.data.permalink +
+		ensData.permalink +
 		'" target="_blank">' +
 		ensData.name +
 		" </a>";
 	cell = row.insertCell();
-	let currentPrice = ensData?.data?.orders[0]?.current_price;
-	let decimal = ensData?.data?.orders[0]?.payment_token_contract?.decimals;
-	if (decimal) {
-		decimal = Number(decimal);
-	}
-	if (currentPrice) {
-		currentPrice = Number(currentPrice);
-		let divider = getDivider(decimal);
-		currentPrice = currentPrice / divider;
-	}
-	let isListPrice = ensData?.data?.orders[0]?.side;
-	if (!isListPrice && currentPrice) currentPrice = currentPrice + ' (BID)'
-	cell.innerHTML = currentPrice ? currentPrice : "";
+
+	cell.innerHTML = ensData.currentPrice ? ensData.currentPrice : "";
 
 	cell = row.insertCell();
-	cell.innerHTML = ensData.data.num_sales;
+
+	cell.innerHTML = ensData.highestOffer ? ensData.highestOffer : "";
+
+	cell = row.insertCell();
+
+	cell.innerHTML = ensData.lastSellPrice ? ensData.lastSellPrice : "";
+
+	cell = row.insertCell();
+	cell.innerHTML = ensData.numSales;
 
 	cell = row.insertCell();
 	const owner = ensData.data?.owner?.user?.username;
 	let address = ensData?.data?.owner?.address;
-	cell.innerHTML = owner ? `<a href="https://opensea.io/${address}" target="_blank">${owner}` : `<a href="https://opensea.io/${address}" target="_blank">${address.substr(0, 5)}`;
-
+	cell.innerHTML = ensData.owner
+		? `<a href="https://opensea.io/${ensData.address}" target="_blank">${ensData.owner}`
+		: `<a href="https://opensea.io/${
+				ensData.address
+		  }" target="_blank">${ensData.address.substr(0, 5)}`;
 });
 
 // FILTER
