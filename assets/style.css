@@ -55,6 +55,20 @@ button.hexclub {
     color: #000;
 }
 
+input.filter {
+    color: #80ff80;
+    background-color: #222;
+    min-width: 350px;
+    width: 33%;
+    border: 1px solid #80ff80;
+    border-radius: 5px;
+}
+
+table.data {
+    font-weight: normal;
+    font-size: 10px;
+}
+
 .matrix {
     display: block;
     list-style: none;
