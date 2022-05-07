@@ -8,13 +8,14 @@ body {
     line-height: 200% !important;
 }
 
-h1 {
+a.logo h1 {
     color: #000;
     background: #32CD32;
     font-weight: 700;
     font-style: italic;
     display: inline-block;
     padding: 10px;
+    font-size: 36px;
 }
 
 a {
