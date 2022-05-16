@@ -23,6 +23,10 @@ a {
     font-weight: 700;
 }
 
+.mintable a:visited {
+    color: #1d611d !important;
+}
+
 img {
     max-width: 800px;
 }
